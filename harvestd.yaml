@@ -1,0 +1,8 @@
+----
+checks:
+	- nfs:
+		frequency: 10
+outputs:
+	- influxdb:
+		buffer: yes
+		frequency: 1m
