@@ -3,17 +3,17 @@ package main
 import (
 	`errors`
 	`fmt`
-	`github.com/brandentimm/harvestd/plugin`
 	`github.com/brandentimm/harvestd/plugin/nfs`
+	`io`
 	`os`
 	`time`
 )
 
-func readWithTimeout(reaper plugin.Reaper, p []byte, timeout int64) (n int, err error) {
+func readWithTimeout(reader io.Reader, p []byte, timeout int64) (n int, err error) {
 	readChan := make(chan int, 1)
 
 	go func() {
-		bytesRead, readError := reaper.Read(p)
+		bytesRead, readError := reader.Read(p)
 		if readError != nil {
 			readChan <- 0
 		}
